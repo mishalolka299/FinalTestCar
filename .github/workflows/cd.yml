@@ -1,0 +1,32 @@
+name: CD
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+        
+    - name: Restore dependencies
+      run: dotnet restore src/FinalTest.Api/FinalTest.Api.csproj
+      
+    - name: Build
+      run: dotnet build src/FinalTest.Api/FinalTest.Api.csproj --configuration Release --no-restore
+      
+    - name: Publish
+      run: dotnet publish src/FinalTest.Api/FinalTest.Api.csproj --configuration Release --no-build --output ./publish
+      
+    - name: Deploy Placeholder
+      run: |
+        echo "Here you can add your deployment steps (e.g. Docker build, deploy to Azure, etc.)"
+        echo "The compiled application is located in the ./publish directory"
