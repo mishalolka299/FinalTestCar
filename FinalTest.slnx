@@ -2,5 +2,7 @@
   <Folder Name="/src/">
     <Project Path="src/FinalTest.Api/FinalTest.Api.csproj" />
   </Folder>
-
+  <Folder Name="/tests/">
+    <Project Path="tests/FinalTest.Api.Tests.Unit/FinalTest.Api.Tests.Unit.csproj" />
+  </Folder>
 </Solution>

@@ -250,3 +250,4 @@ C:\Users\Mishalolka299\Desktop\OATests\FinalTestLukianchuk\FinalTestCar\src\Fina
 C:\Users\Mishalolka299\Desktop\OATests\FinalTestLukianchuk\FinalTestCar\src\FinalTest.Api\obj\Debug\net10.0\FinalTest.Api.pdb
 C:\Users\Mishalolka299\Desktop\OATests\FinalTestLukianchuk\FinalTestCar\src\FinalTest.Api\obj\Debug\net10.0\FinalTest.Api.genruntimeconfig.cache
 C:\Users\Mishalolka299\Desktop\OATests\FinalTestLukianchuk\FinalTestCar\src\FinalTest.Api\obj\Debug\net10.0\ref\FinalTest.Api.dll
+C:\Users\Mishalolka299\Desktop\OATests\FinalTestLukianchuk\FinalTestCar\src\FinalTest.Api\obj\Debug\net10.0\FinalTest.Api.sourcelink.json
