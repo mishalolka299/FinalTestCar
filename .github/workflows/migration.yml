@@ -1,0 +1,60 @@
+name: Migration
+
+on:
+  pull_request:
+    branches: [ "main", "master" ]
+    paths:
+      - 'src/FinalTest.Api/**'
+
+jobs:
+  validate-migrations:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: autosalon
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Install EF Core tools
+        run: dotnet tool install --global dotnet-ef
+
+      - name: Restore
+        run: dotnet restore src/FinalTest.Api/FinalTest.Api.csproj
+
+      - name: Build
+        run: dotnet build src/FinalTest.Api/FinalTest.Api.csproj --no-restore
+
+      - name: Check for pending model changes
+        run: dotnet ef migrations has-pending-model-changes --project src/FinalTest.Api --startup-project src/FinalTest.Api
+
+      - name: Apply migrations
+        env:
+          ConnectionStrings__Default: "Host=localhost;Port=5432;Database=autosalon;Username=postgres;Password=postgres"
+        run: dotnet ef database update --project src/FinalTest.Api --startup-project src/FinalTest.Api
+
+      - name: Generate idempotent SQL script
+        run: dotnet ef migrations script --idempotent --project src/FinalTest.Api --startup-project src/FinalTest.Api --output migrations.sql
+
+      - name: Upload migration script
+        uses: actions/upload-artifact@v4
+        with:
+          name: migration-sql
+          path: migrations.sql
