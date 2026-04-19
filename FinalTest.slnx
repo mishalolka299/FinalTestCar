@@ -5,5 +5,6 @@
   <Folder Name="/tests/">
     <Project Path="tests/FinalTest.Api.Tests.Unit/FinalTest.Api.Tests.Unit.csproj" />
     <Project Path="tests/FinalTest.Api.Tests.Integration/FinalTest.Api.Tests.Integration.csproj" />
+    <Project Path="tests/FinalTest.Api.Tests.Database/FinalTest.Api.Tests.Database.csproj" />
   </Folder>
 </Solution>
